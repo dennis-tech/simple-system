@@ -1,8 +1,41 @@
 <?php
 session_start();
+require_once 'config.php';
 if (!isset($_SESSION['username'])) {
   header("Location: index.php");
+
 }
+// if(isset($_GET['arr'])){
+    
+//   $data = explode (",", $_GET['arr']); 
+
+//    $name = $data[0];
+//    $email = $data[1];
+//    $phone = $data[2];
+//    $location = $data[3];
+//    $password = $data[4];
+//    $status = $data[5];
+// // insert the data into the database
+// $sql = "INSERT INTO `employees`(`name`, `email`, `password`, `phone_number`, `location`, `status`) VALUES ('$name', '$email', '$password', '$phone', '$location', '$status')";
+// mysqli_query($conn, $sql);
+// //  get all employees data from the database to data.json file
+// $sql = "SELECT * FROM employees";
+// $result = mysqli_query($conn, $sql);
+// $data = array();
+// while($row = mysqli_fetch_assoc($result)){
+//    $data[] = $row;
+// }
+// $fp = fopen('data.json', 'w');
+// fwrite($fp, json_encode($data));
+// fclose($fp);
+
+// echo $name;
+//    // close connection
+//    mysqli_close($conn);
+//    header("Location: main.php");
+// }
+
+
 
 ?>
 
@@ -27,7 +60,7 @@ if (!isset($_SESSION['username'])) {
     />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
     </head>
    
     <body>
@@ -62,13 +95,18 @@ if (!isset($_SESSION['username'])) {
             
             </div>
           </form>
-          <div>
-          <a href="logout.php"  id="logout" class="btn-btn">Logout</a>
+
+          <div class="links">
+                <div>
+                  <a href="logout.php"  id="logout" class="btn-btn">Logout</a>
+                </div>
+              <div>
+                <a id="open-modal" class="btn-btn">Create</a>
+              </div>
           </div>
-        
           
         </div>
-        <button id="open-modal" class="btn-btn">Create employee</button>
+        
       
         <div class="display_table">
                     <table class="list" id="myTable">
@@ -90,6 +128,10 @@ if (!isset($_SESSION['username'])) {
                       </table>
         </div>
       </div>
+      <table class="table1">
+        <thead>  </thead>
+        <tbody> </tbody>
+      </table>
 <script
       src="https://code.jquery.com/jquery-3.6.0.min.js"
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
@@ -101,6 +143,7 @@ if (!isset($_SESSION['username'])) {
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-      <script src="app.js"></script>
+    <!-- src="app.js" -->
+      <script src="app.js" ></script>
 </body>
 </html>

@@ -39,10 +39,10 @@ if (isset($_POST['submit'])) {
 
 	<title>system-test</title>
 </head>
-<body>
+<body class="body1">
 	<div class="container">
 		<form action="" method="POST" class="login-email">
-			<p class="login-text" style="font-size: 2rem; font-weight: 800;">Login</p>
+			<p class="login-text" style="font-size: 2rem; font-weight: 800;"> System-test <br>Login</p>
 			<div class="input-group">
 				<input type="email" placeholder="Email" name="email" value="<?php echo $email; ?>" required>
 			</div>
