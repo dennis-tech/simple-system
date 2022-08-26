@@ -1,4 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+  header("Location: index.php");
+}
 
+?>
 
 
 
@@ -25,9 +31,9 @@
     <style>
         .employpage{
           display: flex;
-          width: 1000px;
+          /* width: 1000px; */
           flex-wrap: wrap;
-          margin: auto;
+          /* margin: auto; */
           font-family: verdana;
           font-size: 16px;
           border: solid 2px #f1f1f1;
@@ -38,7 +44,7 @@
       }
       .employpage .display_table {
         padding:15px;
-        width:52%;
+        width:50%;
       }
       .employpage .display_table table{
         border:solid 1px #ccc;
@@ -66,6 +72,7 @@
       .formdata form{
         display:flex;
         flex-wrap:wrap;
+        width:100%;
         background:#f1f1f1;
         padding:15px;
       }
@@ -97,14 +104,31 @@
       table{
         background-color: bisque;
       }
+        .hidden{
+            display: none;
+        }
+        .btn-btn{
+            cursor: pointer;
         
+    width: 100px;
+    padding: 15px 20px;
+
+    border: none;
+    background: #a29bfe;
+    outline: none;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    color: #FFF;
+    cursor: pointer;
+    transition: .3s;
+        }
     </style>
 </head>
 <body>
     <div class="employpage"> 
         <div class="formdata">
           
-        <form onsubmit="event.preventDefault();" autocomplete="off">
+        <form onsubmit="event.preventDefault();" autocomplete="off" class="hidden">
             
       
             <label>Full Name</label>
@@ -132,8 +156,9 @@
             
             </div>
           </form>
-      
+          <a href="logout.php" class="btn-btn">Logout</a>
         </div>
+        <button id="open-modal" class="btn-btn">Create employee</button>
       
         <div class="display_table">
                     <table class="list" id="employeeList">
@@ -159,6 +184,10 @@
       </div>
 
       <script>
+        document.getElementById('open-modal').addEventListener('click', function(){
+            document.querySelector('.hidden').classList.remove('hidden');
+            document.querySelector('#open-modal').classList.add('hidden');
+        });
         var active = false;
         var selectedRow = null;
         var btn = document.querySelector(".button");
