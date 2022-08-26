@@ -94,16 +94,10 @@
         display:table;
         color:#fff;
       }
-      /* style for selected rows */
-        .selected{
-            background:#e80a0a;
-        }
-        .selected tr{
-            color:#000;
-        }
-        .selected tr:first-child{
-            border-left:solid 1px rgb(137, 48, 48);
-        }
+      table{
+        background-color: bisque;
+      }
+        
     </style>
 </head>
 <body>
@@ -121,18 +115,20 @@
       
             <label>Mobile</label>
             <input type="text" class="mobile" value=""  placeholder=" Mobile phone">
+
+            <label>Password</label>
+            <input type="text" class="password" value="" placeholder="Password">
       
             <label>Location</label>
             <input type="text" class="location" value="" placeholder="Location">
 
-            <label>Password</label>
-            <input type="text" class="password" value="" placeholder="Password">
+           
             
             <label>Status</label>
             <input type="text" class="status" value="" placeholder="Status">
       
             <div style="width:100%">
-            <input type="submit"  value="Submit"  class="button">
+            <input type="submit"  value="CREATE NEW"  class="button">
             
             </div>
           </form>
@@ -149,10 +145,12 @@
                            <th>Full Name</th>
                            <th>Email</th>
                            <th>Mobile</th>
-                           <th>Location</th>
-                           <th>Action</th>                      
-                           <th>Status</th>
                            <th>Password</th>
+                           <th>Location</th>
+                           <th>Status</th>
+                           <th>Action</th>                      
+                           
+                           
                        </tr>
                          </thead>
                           
@@ -206,10 +204,10 @@
           var emp_td2 = emp_tr.insertCell(1);
           var emp_td3 = emp_tr.insertCell(2);
           var emp_td4 = emp_tr.insertCell(3);
-          var emp_td5 = emp_tr.insertCell(4);
-          var emp_td6 = emp_tr.insertCell(5);
+          var emp_td8 = emp_tr.insertCell(4);
+          var emp_td5 = emp_tr.insertCell(5);
             var emp_td7 = emp_tr.insertCell(6);
-            var emp_td8 = emp_tr.insertCell(7);
+           var emp_td6 = emp_tr.insertCell(7);
 
           var totalRowCount = document.querySelector(".list tr").length;
           emp_td1.innerHTML = empTable.rows.length-1;
@@ -220,7 +218,7 @@
             emp_td4.innerHTML = x.mob;
           emp_td5.innerHTML = x.location;
           
-          emp_td6.innerHTML = '<a class="edt" onClick="onEdit(this)">Edit</a>  / <a class="dlt" onClick="onDelete(this)">Delete</a>';
+          emp_td6.innerHTML = '<a class="edt" onClick="onEdit(this)">Edit</a>  / <a class="dlt" onClick="onDelete(this)">Delete</a> / <a onClick="onRead(this)">Read</a> ';
             emp_td7.innerHTML = active;
             emp_td8.innerHTML = x.password;
             
@@ -256,9 +254,26 @@
             document.querySelector(".empname").value = selectedRow.cells[1].innerHTML;
             document.querySelector(".email").value = selectedRow.cells[2].innerHTML;
              document.querySelector(".mobile").value = selectedRow.cells[3].innerHTML;
-            document.querySelector(".location").value = selectedRow.cells[4].innerHTML;
-            document.querySelector(".status").value = selectedRow.cells[5].innerHTML;
-            document.querySelector(".password").value = selectedRow.cells[7].innerHTML;
+            document.querySelector(".location").value = selectedRow.cells[5].innerHTML;            
+            document.querySelector(".status").value = selectedRow.cells[6].innerHTML;
+            document.querySelector(".password").value = selectedRow.cells[4].innerHTML;
+
+        }
+        function onRead(y){
+          console.log(y);
+        
+          //var selecteventbtn = document.querySelector("a.edt");
+            selectedRow = y.parentElement.parentElement;
+            //document.querySelector(".empid").value = selectedRow.cells[0].innerHTML;
+            document.querySelector(".empname").value = selectedRow.cells[1].innerHTML;
+            document.querySelector(".email").value = selectedRow.cells[2].innerHTML;
+             document.querySelector(".mobile").value = selectedRow.cells[3].innerHTML;
+            document.querySelector(".location").value = selectedRow.cells[5].innerHTML;
+            document.querySelector(".status").value = selectedRow.cells[6].innerHTML;
+            document.querySelector(".password").value = selectedRow.cells[4].innerHTML;
+            // alert with all information
+            alert("Name: " + selectedRow.cells[1].innerHTML + "\n" + "Email: " + selectedRow.cells[2].innerHTML + "\n" + "Mobile: " + selectedRow.cells[3].innerHTML + "\n" + "Location: " + selectedRow.cells[5].innerHTML + "\n" + "Status: " + selectedRow.cells[6].innerHTML + "\n" + "Password: " + selectedRow.cells[4].innerHTML);
+            
 
         }
         
@@ -266,9 +281,9 @@
           selectedRow.cells[1].innerHTML = redemp.ename;
           selectedRow.cells[2].innerHTML = redemp.email;
           selectedRow.cells[3].innerHTML = redemp.mob;
-          selectedRow.cells[4].innerHTML = redemp.location;
-            selectedRow.cells[5].innerHTML = redemp.status;
-            selectedRow.cells[7].innerHTML = redemp.password;
+          selectedRow.cells[5].innerHTML = redemp.location;
+            selectedRow.cells[6].innerHTML = redemp.status;
+            selectedRow.cells[4].innerHTML = redemp.password;
           
         }
         
@@ -280,65 +295,65 @@
             }
         }
         
-           // getting rows that can be dragged
-        var rows = document.querySelectorAll('.row-position');
-        console.log(rows);
-        //drag start
-        function handleDragStart(e) {
-            console.log('drag start');
-            // this / e.target is the source node.
-            this.style.opacity = '0.4';
-            dragSrcEl = this;
-            e.dataTransfer.effectAllowed = 'move';
-            e.dataTransfer.setData('text/html', this.innerHTML);
-        }
+        //    // getting rows that can be dragged
+        // var rows = document.querySelectorAll('.row-position');
+        // // console.log(rows);
+        // //drag start
+        // function handleDragStart(e) {
+        //     console.log('drag start');
+        //     // this / e.target is the source node.
+        //     this.style.opacity = '0.4';
+        //     dragSrcEl = this;
+        //     e.dataTransfer.effectAllowed = 'move';
+        //     e.dataTransfer.setData('text/html', this.innerHTML);
+        // }
         
-        //drag over
-        function handleDragOver(e) {
-            if (e.preventDefault) {
-                e.preventDefault(); // Necessary. Allows us to drop.
-            }
-            e.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
-            return false;
-        }
-        //drag enter
-        function handleDragEnter(e) {
-            this.classList.add('over');
-        }
-        //drag leave
-        function handleDragLeave(e) {
-            this.classList.remove('over');  // this / e.target is previous target element.
-        }
-        //drop
-        function handleDrop(e) {
-            // this/e.target is current target element.
-            if (e.stopPropagation) {
-                e.stopPropagation(); // Stops some browsers from redirecting.
-            }
-            // Don't do anything if dropping the same column we're dragging.
-            if (dragSrcEl != this) {
-                // Set the source column's HTML to the HTML of the column we dropped on.
-                dragSrcEl.innerHTML = this.innerHTML;
-                this.innerHTML = e.dataTransfer.getData('text/html');
-            }
-            return false;
-        }
-        //drag end
-        function handleDragEnd(e) {
-            // this/e.target is the source node.
-            this.style.opacity = '1';
-            [].forEach.call(rows, function (row) {
-                row.classList.remove('over');
-            });
-        }
-        [].forEach.call(rows, function (row) {
-            row.addEventListener('dragstart', handleDragStart, false);
-            row.addEventListener('dragenter', handleDragEnter, false)
-            row.addEventListener('dragover', handleDragOver, false);
-            row.addEventListener('dragleave', handleDragLeave, false);
-            row.addEventListener('drop', handleDrop, false);
-            row.addEventListener('dragend', handleDragEnd, false);
-        });
+        // //drag over
+        // function handleDragOver(e) {
+        //     if (e.preventDefault) {
+        //         e.preventDefault(); // Necessary. Allows us to drop.
+        //     }
+        //     e.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
+        //     return false;
+        // }
+        // //drag enter
+        // function handleDragEnter(e) {
+        //     this.classList.add('over');
+        // }
+        // //drag leave
+        // function handleDragLeave(e) {
+        //     this.classList.remove('over');  // this / e.target is previous target element.
+        // }
+        // //drop
+        // function handleDrop(e) {
+        //     // this/e.target is current target element.
+        //     if (e.stopPropagation) {
+        //         e.stopPropagation(); // Stops some browsers from redirecting.
+        //     }
+        //     // Don't do anything if dropping the same column we're dragging.
+        //     if (dragSrcEl != this) {
+        //         // Set the source column's HTML to the HTML of the column we dropped on.
+        //         dragSrcEl.innerHTML = this.innerHTML;
+        //         this.innerHTML = e.dataTransfer.getData('text/html');
+        //     }
+        //     return false;
+        // }
+        // //drag end
+        // function handleDragEnd(e) {
+        //     // this/e.target is the source node.
+        //     this.style.opacity = '1';
+        //     [].forEach.call(rows, function (row) {
+        //         row.classList.remove('over');
+        //     });
+        // }
+        // [].forEach.call(rows, function (row) {
+        //     row.addEventListener('dragstart', handleDragStart, false);
+        //     row.addEventListener('dragenter', handleDragEnter, false)
+        //     row.addEventListener('dragover', handleDragOver, false);
+        //     row.addEventListener('dragleave', handleDragLeave, false);
+        //     row.addEventListener('drop', handleDrop, false);
+        //     row.addEventListener('dragend', handleDragEnd, false);
+        // });
 
 
 
