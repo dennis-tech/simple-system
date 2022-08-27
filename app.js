@@ -140,24 +140,11 @@ function onDelete() {
       selectdelete = selectdelete.parentElement.parentElement.remove(0);
   }
 }
-// fetch api
 
-// async function loadIntoTable(url, table){
-//  const tableHead = table.querySelector("thead");
-//  const tableBody = table.querySelector("tbody");
-//  const response = await fetch(url);
-//  const{ data }= await response.json(); 
-//    tableHead.innerHTML = `<tr></tr>`;
-//    tableBody.innerHTML = "";
-//     data.forEach(function(row){
-//       const tr = document.createElement("tr");
-//       tableBody.appendChild(tr);
-//       Object.keys(row).forEach(function(key){
-//         const td = document.createElement("td");
-//         td.innerHTML = row[key];
-//         tr.appendChild(td);
-//       });
-//     });
-
-// }
-// loadIntoTable("./data.json", document.querySelector(".table1"));
+// getting the value of the selected row
+function getSelectedRow(){
+  var selectedRow = document.querySelector(".list tr");
+  console.log(selectedRow);
+  return selectedRow;
+}
+getSelectedRow();
