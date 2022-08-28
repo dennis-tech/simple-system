@@ -148,3 +148,42 @@ function getSelectedRow(){
   return selectedRow;
 }
 getSelectedRow();
+
+// getting .list tr to capture its data
+function getTableData(){
+  var tableData = document.querySelector(".list tr");
+  console.log(tableData);
+  return tableData;
+}
+getTableData();
+
+// function to move the row up and down
+function moveRow(row, direction) {
+  var index = row.rowIndex;
+  var table = row.parentElement;
+  var rows = table.rows;
+  var rowCount = table.rows.length;
+  var newIndex = index + direction;
+  if (newIndex >= 0 && newIndex < rowCount) {
+    table.insertBefore(rows[index], rows[newIndex]);
+  }
+}
+
+// function to replace the row with the new row
+function replaceRow(row, newRow) {
+  var index = row.rowIndex;
+  var table = row.parentElement;
+  table.replaceChild(newRow, row);
+}
+
+// function to change row status to active or inactive
+function changeRowStatus(row, status) {
+  var index = row.rowIndex;
+  var table = row.parentElement;
+  var rows = table.rows;
+  var rowCount = table.rows.length;
+  var newIndex = index + status;
+  if (newIndex >= 0 && newIndex < rowCount) {
+    table.insertBefore(rows[index], rows[newIndex]);
+  }
+}
